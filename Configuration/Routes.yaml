@@ -1,0 +1,17 @@
+
+--
+    name: 'Homepage'
+    uriPattern: ''
+    defaults:
+      @package: Events
+      @controller: Event
+      @format: 'html'
+      @action: 'index'
+
+--
+    name: 'Default action'
+    uriPattern: '{@action}'
+    defaults:
+      @package: Events
+      @controller: Event
+      @format: 'html'

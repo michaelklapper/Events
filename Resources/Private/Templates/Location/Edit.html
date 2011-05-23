@@ -1,0 +1,32 @@
+<f:layout name="Master.html" />
+
+<f:section name="content">
+
+	<f:flashMessages class="flashMessages"/>
+    <f:render partial="FormErrors" arguments="{for: 'newEvent'}" />
+
+    <f:form action="create" object="{updateLocation}" name="updateLocation" enctype="multipart/form-data">
+
+        <label for="title">Title</label><br />
+        <f:form.textfield property="title" id="title" /><br />
+
+        <label for="street">Street</label><br />
+        <f:form.textfield property="street" id="street" /><br />
+
+        <label for="number">Number</label><br />
+        <f:form.textfield property="number" id="number" /><br />
+
+        <label for="zip">Zip</label><br />
+        <f:form.textfield property="zip" id="zip" /><br />
+
+        <label for="city">City</label><br />
+        <f:form.textfield property="city" id="city" /><br />
+
+        <label for="country">Country</label><br />
+        <f:form.textfield property="country" id="country" /><br />
+        <div class="buttons">
+            <ev:form.button type="submit" value="Submit new Location" imageSrc="{f:uri.resource(path: 'Icon/tick.png')}" />
+            <ev:form.button type="reset" value="Cancel" imageSrc="{f:uri.resource(path: 'Icon/cross.png')}" />
+        </div>
+    </f:form>
+</f:section>

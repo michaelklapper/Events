@@ -1,0 +1,15 @@
+<f:layout name="Master.html" />
+
+<f:section name="content">
+    title: {event.title}<br />
+    dateBegin: <f:format.date>{event.dateBegin}</f:format.date><br />
+    dateEnd: <f:format.date>{event.dateEnd}</f:format.date><br />
+    <f:for each="{event.tags}" as="tag">
+        - tag title: {tag.title}<br />
+    </f:for>
+    location: {event.location}<br />
+    comment: {event.comment}<br />
+    description: {event.description}<br />
+
+
+</f:section>

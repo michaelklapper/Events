@@ -1,0 +1,37 @@
+{namespace ev=F3\Events\ViewHelpers}
+
+<f:layout name="Master.html" />
+
+<f:section name="content">
+
+	<f:flashMessages class="flashMessages"/>
+    <f:render partial="FormErrors" arguments="{for: 'newEvent'}" />
+
+    <f:form action="update" object="{event}" name="updateEvent" enctype="multipart/form-data">
+
+        <label for="title">Title</label><br />
+        <f:form.textfield class="text" property="title" id="title" /><br />
+
+        <label for="location">Location</label><br />
+        <f:form.select id="location" property="location" options="{locations}" value="{location}" /><br />
+
+        <label for="description">Description</label><br />
+        <f:form.textarea class="text" property="description" rows="2" cols="40" id="description" /><br />
+
+        <label for="url">Url</label><br />
+        <f:form.textfield class="text" property="url" id="url" /><br />
+
+        <label for="tag">Tags:</label><br />
+        <!--<ev:form.embed property="tags" as="tag">
+           <f:form.textfield class="text" property="title" id="tag" /><br class="">
+        </ev:form.embed>-->
+        <f:form.textfield property="tags.tag.title" id="tags" /><br />
+
+        <label for="comment">Comment</label><br />
+        <f:form.textarea property="comment" rows="2" cols="40" id="comment" /><br />
+        <div class="buttons">
+            <ev:form.button type="submit" value="Submit Event" imageSrc="{f:uri.resource(path: 'Icon/tick.png')}" />
+            <ev:form.button type="reset" value="Cancel" imageSrc="{f:uri.resource(path: 'Icon/cross.png')}" />
+        </div>
+    </f:form>
+</f:section>
