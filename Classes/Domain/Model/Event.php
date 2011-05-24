@@ -64,7 +64,7 @@ class Event {
 
 	/**
 	 * @var \F3\Events\Domain\Model\Location
-	 * @ManyToOne(cascade={"persit"})
+	 * @ManyToOne(cascade={"persist"})
 	 */
 	protected $location;
 
