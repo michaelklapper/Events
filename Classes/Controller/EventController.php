@@ -70,7 +70,9 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 
 	public function initializeUpdateAction() {
 		$this->arguments['updateEvent']->getPropertyMappingConfiguration()->allowCreationForSubProperty('tags.tag');
+		$this->arguments['updateEvent']->getPropertyMappingConfiguration()->allowCreationForSubProperty('tags');
 		$this->arguments['updateEvent']->getPropertyMappingConfiguration()->allowModificationForSubProperty('tags.tag');
+		$this->arguments['updateEvent']->getPropertyMappingConfiguration()->allowModificationForSubProperty('tags');
 	}
 
 	/**
@@ -81,7 +83,6 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function updateAction (\F3\Events\Domain\Model\Event $updateEvent) {
 		$this->eventRepository->update($updateEvent);
 		$this->flashMessageContainer->add('Object "' . $updateEvent . '" was updated.');
-		//$this->redirect('show', NULL, NULL, array('event' => $updateEvent) );
 		$this->redirect('list');
 	}
 

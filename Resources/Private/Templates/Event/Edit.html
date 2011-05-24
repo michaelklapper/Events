@@ -4,7 +4,6 @@
 
 <f:section name="content">
 
-	<f:flashMessages class="flashMessages"/>
     <f:render partial="FormErrors" arguments="{for: 'newEvent'}" />
 
     <f:form action="update" object="{event}" name="updateEvent" enctype="multipart/form-data">
@@ -21,7 +20,7 @@
         <label for="url">Url</label><br />
         <f:form.textfield class="text" property="url" id="url" /><br />
 
-        <label for="tag">Tags:</label><br />
+        <label for="tags">Tags:</label><br />
         <!--<ev:form.embed property="tags" as="tag">
            <f:form.textfield class="text" property="title" id="tag" /><br class="">
         </ev:form.embed>-->
