@@ -64,6 +64,13 @@ class Location {
 	protected $contacts;
 
 	/**
+	 * @var \Doctrine\Common\Collections\ArrayCollection<F3\Events\Domain\Model\Tag>
+	 * @ManyToMany(cascade={"persist", "remove"})
+	 * @JoinTable(name="events_location_tags_join")
+	 */
+	protected $tags;
+
+	/**
 	 * @return void
 	 *
 	 * @author Michael Klapper <mick.klapper.development@gmail.com>
