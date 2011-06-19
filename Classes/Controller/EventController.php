@@ -21,6 +21,12 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $eventRepository;
 
 	/**
+	 * @var \F3\Events\Domain\Repository\LocationRepository
+	 * @inject
+	 */
+	protected $locationRepository;
+
+	/**
 	 * Select special views according to format
 	 *
 	 * @return void
@@ -106,6 +112,11 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Michael Klapper <mick.klapper.development@gmail.com>
 	 */
 	public function createAction(\F3\Events\Domain\Model\Event $event) {
+		$location = $event->getLocation();
+		if ($location->getId()) {
+			$location = $this->locationRepository->findOneById($location->getId());
+			$event->setLocation($location);
+		}
 		$this->eventRepository->add($event);
 		$this->view->assign('value', array('success' => TRUE));
 	}
