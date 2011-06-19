@@ -9,7 +9,8 @@ Ext.define('AM.model.Event', {
         {name: 'url',  type: 'string'},
         {name: 'description',  type: 'string'},
         {name: 'comment',  type: 'string'},
-        {name: 'location',  type: 'object'}
+        {name: 'location',  type: 'object'},
+        {name: 'state',  type: 'object'}
     ],
     idProperty: 'id'
 });

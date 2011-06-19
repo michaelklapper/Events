@@ -19,21 +19,14 @@ class LocationController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $locationRepository;
 
 	/**
-	 * Select special views according to format
+	 * Select special views for ExtDirect.
 	 *
 	 * @return void
 	 * @author Michael Klapper <mick.klapper.development@gmail.com>
 	 */
 	protected function initializeAction() {
-		switch ($this->request->getFormat()) {
-			case 'extdirect' :
-				$this->defaultViewObjectName = 'F3\Events\View\EventView';
-				$this->errorMethodName = 'extErrorAction';
-				break;
-			case 'json' :
-				$this->defaultViewObjectName = 'F3\FLOW3\MVC\View\JsonView';
-				break;
-		}
+		$this->defaultViewObjectName = 'F3\Events\View\EventView';
+		$this->errorMethodName = 'extErrorAction';
 	}
 
     /**

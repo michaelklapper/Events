@@ -74,6 +74,8 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function initializeUpdateAction() {
 		$this->arguments['event']->getPropertyMappingConfiguration()->allowCreationForSubProperty('location');
 		$this->arguments['event']->getPropertyMappingConfiguration()->allowModificationForSubProperty('location');
+		$this->arguments['event']->getPropertyMappingConfiguration()->allowCreationForSubProperty('state');
+		$this->arguments['event']->getPropertyMappingConfiguration()->allowModificationForSubProperty('state');
 	}
 
 	/**
@@ -100,8 +102,9 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	public function initializeCreateAction() {
 		$this->arguments['event']->getPropertyMappingConfiguration()->allowCreationForSubProperty('location');
 		$this->arguments['event']->getPropertyMappingConfiguration()->allowModificationForSubProperty('location');
+		$this->arguments['event']->getPropertyMappingConfiguration()->allowCreationForSubProperty('state');
+		$this->arguments['event']->getPropertyMappingConfiguration()->allowModificationForSubProperty('state');
 	}
-
 
 	/**
 	 * @param \F3\Events\Domain\Model\Event $event
@@ -120,7 +123,6 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 		$this->eventRepository->add($event);
 		$this->view->assign('value', array('success' => TRUE));
 	}
-
 
 	/**
 	 * Allow creation and modification of sub object Location

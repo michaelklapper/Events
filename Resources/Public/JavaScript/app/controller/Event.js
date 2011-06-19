@@ -7,10 +7,12 @@ Ext.define('AM.controller.Event', {
     ],
     stores: [
         'Event',
+        'State',
         'Location'
     ],
     models: [
         'Event',
+        'State',
         'Location'
     ],
     refs: [{

@@ -33,6 +33,10 @@ class EventView extends \F3\ExtJS\ExtDirect\View {
 								'_exposeObjectIdentifier' => true,
 								'_exclude' => array('__isInitialized__')
 							),
+							'state' => array(
+								'_exposeObjectIdentifier' => true,
+								'_exclude' => array('__isInitialized__')
+							),
 						),
 					)
 				)
@@ -61,5 +65,27 @@ class EventView extends \F3\ExtJS\ExtDirect\View {
 			)
 		));
 		$this->assign('value', array('data' => $locations, 'success' => TRUE));
+    }
+
+	/**
+	 * Wrapper to assign locations to the view including success state.
+	 *
+	 * @param mixed $states
+	 * @return void
+	 *
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+    public function assignStates($states) {
+		$this->setConfiguration(array(
+			'value' => array(
+				'data' => array(
+					'_descendAll' => array(
+						'_exposeObjectIdentifier' => true,
+						'_exclude' => array('__isInitialized__')
+					)
+				)
+			)
+		));
+		$this->assign('value', array('data' => $states, 'success' => TRUE));
     }
 }

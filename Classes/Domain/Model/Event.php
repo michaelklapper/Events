@@ -68,6 +68,12 @@ class Event {
 	protected $location;
 
 	/**
+	 * @var \F3\Events\Domain\Model\State
+	 * @ManyToOne(cascade={"all"})
+	 */
+	protected $state;
+
+	/**
 	 * @param string $comment
 	 */
 	public function setComment($comment) {
@@ -196,5 +202,24 @@ class Event {
 	 */
 	public function getLocation() {
 		return $this->location;
+	}
+
+	/**
+	 * @param  \F3\Events\Domain\Model\State $state
+	 * @return void
+	 *
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	public function setState(\F3\Events\Domain\Model\State $state) {
+		$this->state = $state;
+	}
+
+	/**
+	 * @return \F3\Events\Domain\Model\State
+	 *
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	public function getState() {
+		return $this->state;
 	}
 }

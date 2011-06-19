@@ -7,7 +7,11 @@ Ext.define('AM.form.EventForm', {
         this.items = [{
                 name : 'title',
                 fieldLabel: 'Title'
-            },  {
+            }, {
+                xtype: 'stateComboBox',
+                name : 'state',
+                fieldLabel: 'State'
+            }, {
                 xtype: 'genericFieldContainer',
                 fieldLabel: 'Location',
                 items: [{

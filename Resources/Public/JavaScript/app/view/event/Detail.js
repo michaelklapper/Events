@@ -11,6 +11,7 @@ Ext.define('AM.view.event.Detail' ,{
                     '<div class="model-data">',
                         '<span class="model-date">{date:this.formatDate}</span>',
                         '<h1 class="model-title">{title}</h1>',
+                        '<h1 class="model-title">State: {state.title}</h1>',
                         '<h1 class="model-title">Wo: {location:this.getLocationTitle}</h1>',
                     '</div>',
                     '<div class="model-body">Anfang: {timeBegin}</div>',
