@@ -1,34 +1,5 @@
 <f:layout name="Master.html" />
 
 <f:section name="content">
-
-    <f:if condition="{events}">
-        <f:then>
-            <div class="container showgrid">
-                <f:for each="{events}" as="event">
-                   <div class="span-20">
-                       <div class="span-4">
-                           <f:link.action action="show" controller="Event" arguments="{event: event}">{event}</f:link.action>
-                       </div>
-                       <div class="span-4">
-                           <f:format.crop maxCharacters="3">{event.description}</f:format.crop>
-                       </div>
-                       <div class="span-4">
-                           <f:link.action action="show" controller="Event" arguments="{event: event}">Show</f:link.action>
-                       </div>
-                       <div class="span-4">
-                           <f:link.action action="edit" controller="Event" arguments="{event: event}">Update</f:link.action>
-                       </div>
-                       <div class="span-4 last">
-                           <f:link.action action="delete" controller="Event" arguments="{event: event}">Delete</f:link.action>
-                       </div>
-                   </div>
-                </f:for>
-            </div>
-        </f:then>
-        <f:else>
-            <p>There are no Events in list.</p>
-        </f:else>
-    </f:if>
-
+    <div id="content">This content should be replaced by Sencha ExtJS 4 on page load.</div>
 </f:section>

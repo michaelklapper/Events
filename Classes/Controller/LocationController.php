@@ -18,6 +18,24 @@ class LocationController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	protected $locationRepository;
 
+	/**
+	 * Select special views according to format
+	 *
+	 * @return void
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	protected function initializeAction() {
+		switch ($this->request->getFormat()) {
+			case 'extdirect' :
+				$this->defaultViewObjectName = 'F3\Events\View\EventView';
+				$this->errorMethodName = 'extErrorAction';
+				break;
+			case 'json' :
+				$this->defaultViewObjectName = 'F3\FLOW3\MVC\View\JsonView';
+				break;
+		}
+	}
+
     /**
      * Default action
      *
@@ -25,47 +43,77 @@ class LocationController extends \F3\FLOW3\MVC\Controller\ActionController {
      * @author Michael Klapper <mick.klapper.development@gmail.com>
      */
     public function indexAction() {
+		$this->redirect('list');
     }
 
 	/**
-	 * @return string HTML based output
+	 * @extdirect
+	 * @return string
 	 *
 	 * @author Michael Klapper <mick.klapper.development@gmail.com>
 	 */
 	public function listAction() {
-		$this->view->assign('locations', $this->locationRepository->findAll());
-	}
-
-	/**
-	 * @param \F3\Events\Domain\Model\Location|null $newLocation
-	 * @dontValidate $newLocation
-	 * @return string HTML based output
-	 *
-	 * @author Michael Klapper <mick.klapper.development@gmail.com>
-	 */
-	public function newAction(\F3\Events\Domain\Model\Location $newLocation = null) {
-	}
-
-	/**
-	 * @param \F3\Events\Domain\Model\Location $newLocation
-	 * @dontValidate $newLocation
-	 * @return string HTML based output
-	 *
-	 * @author Michael Klapper <mick.klapper.development@gmail.com>
-	 */
-	public function createAction(\F3\Events\Domain\Model\Location $newLocation) {
-		$this->locationRepository->add($newLocation);
-		$this->flashMessageContainer->add('Add new ' . $newLocation . ' to the repository.');
-		$this->redirect('list');
+		$this->view->assignLocations($this->locationRepository->findAll());
 	}
 
 	/**
 	 * @param \F3\Events\Domain\Model\Location $location
-	 * @return string HTML based output
+	 * @dontValidate $location
+	 * @extdirect
+	 * @return string
 	 *
 	 * @author Michael Klapper <mick.klapper.development@gmail.com>
 	 */
-	public function showAction(\F3\Events\Domain\Model\Location $location) {
-		$this->view->assign('location', $location);
+	public function createAction(\F3\Events\Domain\Model\Location $location) {
+		$this->locationRepository->add($location);
+		$this->view->assignLocations(null);
+	}
+
+	/**
+	 * @param \F3\Events\Domain\Model\Location $location
+	 * @dontValidate $location
+	 * @extdirect
+	 * @return string
+	 *
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	public function updateAction(\F3\Events\Domain\Model\Location $location) {
+		$this->locationRepository->update($location);
+	}
+
+	/**
+	 * @param \F3\Events\Domain\Model\Location $location
+	 * @dontValidate $location
+	 * @extdirect
+	 * @return string
+	 *
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	public function readAction(\F3\Events\Domain\Model\Location $location) {
+		$this->view->assignLocations($location);
+	}
+
+	/**
+	 * @param \F3\Events\Domain\Model\Location $location
+	 * @dontValidate $location
+	 * @return string
+	 *
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	public function destroyAction(\F3\Events\Domain\Model\Location $location) {
+		$this->locationRepository->remove(
+			$this->locationRepository->findOneById($location->getId())
+		);
+	}
+
+	/**
+	 * A preliminary error action for handling validation errors
+	 * by assigning them to the ExtDirect View that takes care of
+	 * converting them.
+	 *
+	 * @return void
+	 */
+	public function extErrorAction() {
+		$this->view->assignErrors($this->arguments->getValidationResults());
 	}
 }

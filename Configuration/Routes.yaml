@@ -1,5 +1,28 @@
 
 --
+    name: 'Login Actions'
+    uriPattern: 'login/{@action}'
+    defaults:
+      @package: Events
+      @controller: Login
+      @action: 'index'
+
+--
+    name: 'Default action'
+    uriPattern: 'location/{@action}'
+    defaults:
+      @package: Events
+      @controller: Location
+      @format: 'json'
+--
+    name: 'Default action'
+    uriPattern: '{@action}'
+    defaults:
+      @package: Events
+      @controller: Event
+      @format: 'json'
+
+--
     name: 'Homepage'
     uriPattern: ''
     defaults:
@@ -8,10 +31,4 @@
       @format: 'html'
       @action: 'index'
 
---
-    name: 'Default action'
-    uriPattern: '{@action}'
-    defaults:
-      @package: Events
-      @controller: Event
-      @format: 'html'
+

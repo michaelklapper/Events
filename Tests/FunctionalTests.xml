@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<phpunit strict="true"
+                bootstrap="FunctionalTestBootstrap.php"
+                convertErrorsToExceptions="true"
+                convertNoticesToExceptions="true"
+                convertWarningsToExceptions="true">
+        <testsuites>
+                <testsuite name="All tests">
+                        <directory>Functional</directory>
+                </testsuite>
+        </testsuites>
+</phpunit>

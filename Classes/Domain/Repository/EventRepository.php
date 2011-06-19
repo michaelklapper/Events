@@ -11,5 +11,4 @@ namespace F3\Events\Domain\Repository;
  * @author Michael Klapper <mick.klapper.development@gmail.com>
  */
 class EventRepository extends \F3\FLOW3\Persistence\Repository {
-
 }

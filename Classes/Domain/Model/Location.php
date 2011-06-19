@@ -17,6 +17,7 @@ class Location {
 
 	/**
 	 * @var integer
+	 * @identity
 	 * @Id
 	 * @GeneratedValue
 	 */
@@ -24,7 +25,6 @@ class Location {
 
 	/**
 	 * @var string
-	 * @identity
 	 * @validate StringLength(minimum = 3, maximum = 120)
 	 */
 	protected $title;
@@ -59,27 +59,6 @@ class Location {
 	protected $country;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection<F3\Events\Domain\Model\Contact>
-	 */
-	protected $contacts;
-
-	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection<F3\Events\Domain\Model\Tag>
-	 * @ManyToMany(cascade={"persist", "remove"})
-	 * @JoinTable(name="events_location_tags_join")
-	 */
-	protected $tags;
-
-	/**
-	 * @return void
-	 *
-	 * @author Michael Klapper <mick.klapper.development@gmail.com>
-	 */
-	public function __construct() {
-		$this->contacts = new \Doctrine\Common\Collections\ArrayCollection();
-	}
-
-	/**
 	 * @param  string $city
 	 * @return void
 	 *
@@ -96,25 +75,6 @@ class Location {
 	 */
 	public function getCity() {
 		return $this->city;
-	}
-
-	/**
-	 * @param \F3\Events\Domain\Model\Person\Contact $contact
-	 * @return void
-	 *
-	 * @author Michael Klapper <mick.klapper.development@gmail.com>
-	 */
-	public function addContact(\F3\Events\Domain\Model\Person\Contact $contact) {
-		$this->contacts->add($contact);
-	}
-
-	/**
-	 * @return \Doctrine\Common\Collections\ArrayCollection<F3\Events\Domain\Model\Contact>
-	 *
-	 * @author Michael Klapper <mick.klapper.development@gmail.com>
-	 */
-	public function getContacts() {
-		return $this->contacts;
 	}
 
 	/**
