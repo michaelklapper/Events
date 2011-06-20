@@ -1,26 +1,34 @@
 Ext.define('AM.view.event.Detail' ,{
     extend: 'Ext.panel.Panel',
     alias : 'widget.eventDetail',
-    cls: 'preview',
+    cls: 'detail',
     autoScroll: true,
     border: true,
-    items: [{
-        title: 'first',
-        html: 'show google maps'
-    }],
+
     initComponent: function () {
         Ext.apply(this, {
             tpl: Ext.create('Ext.XTemplate',
                     '<div class="model-data">',
                         '<span class="model-date">{date:this.formatDate}</span>',
                         '<h1 class="model-title">{title}</h1>',
-                        '<h1 class="model-title">State: {state.title}</h1>',
-                        '<h1 class="model-title">Wo: {location:this.getLocationTitle}</h1>',
+                        '<h2 class="model-title">State: {state.title}</h2>',
                     '</div>',
-                    '<div class="model-body">Anfang: {timeBegin}</div>',
-                    '<div class="model-body">Ende: {timeEnd}</div>',
+                    '<br /><br />',
+                    '<button action="openLocationInMap">Open lcoation in maps</button>',
+                    '<h2 class="model-title">Location: {location:this.getLocationTitle}</h2>',
+                    '<div class="model-body">Address: {location.street} {location.number}, {location.zip} {location.city}, {location.country}</div>',
+                    '<br /><br />',
+                    '<h2 class="model-title">Appointment</h2>',
+                    '<div class="model-body">Date: {date:this.formatDate}</div>',
+                    '<div class="model-body">Time begin: {timeBegin}</div>',
+                    '<div class="model-body">Time end: {timeEnd}</div>',
+                    '<br /><br />',
                     '<div class="model-body">Url: <a href="{url}" target="_blank">{url}</a></div>',
+                    '<br /><br />',
+                    '<h2 class="model-title">Description</h2>',
                     '<div class="model-body">{description}</div>',
+                    '<br /><br />',
+                    '<h2 class="model-title">Comment</h2>',
                     '<div class="model-body">{comment}</div>',
                     {
                     getLocationTitle: function (location) {
