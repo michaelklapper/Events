@@ -16,6 +16,9 @@ Ext.define('AM.controller.Event', {
         'Location'
     ],
     refs: [{
+        ref: 'contentArea',
+        selector: 'viewport panel[id=contentPanel]'
+    }, {
         ref: 'tabContainer',
         selector: 'tabContainer'
     }, {
@@ -28,6 +31,9 @@ Ext.define('AM.controller.Event', {
 
     init: function() {
         this.control({
+            'button[action=showEventList]': {
+                click: this.indexAction
+            },
             'eventList': {
                 itemdblclick: this.addDetailTabView
             },
@@ -43,6 +49,41 @@ Ext.define('AM.controller.Event', {
             'eventList button[action=delete]': {
                 click: this.deleteEvent
             }
+        });
+    },
+
+    /**
+     *
+     */
+    indexAction: function () {
+        this.getContentArea().addContent({
+            xtype: 'tabContainer',
+            minWidth: 300,
+            region: 'center',
+            id: 'eventTabContainer',
+            activeTab: 0,
+            bbar: this.createStatusBar(),
+            items: [{
+                title: 'All Events',
+                xtype: 'eventList',
+                minWidth: 300
+            }]
+        });
+    },
+
+    /**
+     * Create the bottom bar.
+     *
+     * @private
+     * @return {}
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
+     */
+    createStatusBar: function () {
+        return Ext.create('Ext.ux.StatusBar', {
+            defaultText: '',
+            id: 'status-id',
+            clear: true
         });
     },
 

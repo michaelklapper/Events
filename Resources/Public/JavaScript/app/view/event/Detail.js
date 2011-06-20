@@ -4,7 +4,10 @@ Ext.define('AM.view.event.Detail' ,{
     cls: 'preview',
     autoScroll: true,
     border: true,
-
+    items: [{
+        title: 'first',
+        html: 'show google maps'
+    }],
     initComponent: function () {
         Ext.apply(this, {
             tpl: Ext.create('Ext.XTemplate',
@@ -35,6 +38,7 @@ Ext.define('AM.view.event.Detail' ,{
                     }
                 })
         });
+
         this.callParent(arguments);
     }
 });
