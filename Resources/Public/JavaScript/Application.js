@@ -8,7 +8,6 @@ Ext.application({
     controllers: [
         'Event',
         'CalendarController',
-        'GMapsController',
         'Location'
     ],
 
