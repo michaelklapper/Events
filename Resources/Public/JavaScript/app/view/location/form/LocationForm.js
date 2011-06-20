@@ -1,5 +1,5 @@
-Ext.define('AM.form.LocationForm', {
-    extend: 'AM.form.GenericForm',
+Ext.define('AM.view.location.form.LocationForm', {
+    extend: 'AM.view.AbstractForm',
     alias : 'widget.locationForm',
 
     initComponent: function() {

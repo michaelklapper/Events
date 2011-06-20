@@ -1,5 +1,5 @@
-Ext.define('AM.form.EventForm', {
-    extend: 'AM.form.GenericForm',
+Ext.define('AM.view.event.form.EventForm', {
+    extend: 'AM.view.AbstractForm',
     alias : 'widget.eventForm',
 
     initComponent: function() {

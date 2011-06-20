@@ -1,4 +1,4 @@
-Ext.define('AM.form.GenericForm', {
+Ext.define('AM.view.AbstractForm', {
     extend: 'Ext.form.Panel',
     alias : 'widget.genericForm',
 
