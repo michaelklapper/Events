@@ -27,6 +27,24 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $locationRepository;
 
 	/**
+	 * Contains the settings of the current package
+	 * @var array
+	 */
+	protected $settings;
+
+	/**
+	 * Injects the settings of the package this controller belongs to.
+	 *
+	 * @param array $settings Settings container of the current package
+	 * @return void
+	 *
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	public function injectSettings(array $settings) {
+		$this->settings = $settings;
+	}
+
+	/**
 	 * Select special views according to format
 	 *
 	 * @return void
@@ -51,6 +69,7 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 * @author Michael Klapper <mick.klapper.development@gmail.com>
 	 */
 	public function indexAction() {
+		$this->view->assign('GoogleMapsApiKey', $this->settings['GoogleMaps']['apiKey']);
 	}
 
 	/**

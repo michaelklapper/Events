@@ -2,3 +2,5 @@ Events:
   StageNotification:
     approved: 4
     canceled: 5
+  GoogleMaps:
+    apiKey:
