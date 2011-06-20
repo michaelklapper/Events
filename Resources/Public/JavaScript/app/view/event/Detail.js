@@ -11,7 +11,6 @@ Ext.define('AM.view.event.Detail' ,{
     extend: 'Ext.panel.Panel',
     alias : 'widget.eventDetail',
     cls: 'detail',
-    id: 'eventDetail',
     border: true,
     layout:'column',
     margins:'35 5 5 0',
