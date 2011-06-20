@@ -1,2 +1,4 @@
 Events:
-  projectTitle: 'Event management'
+  StageNotification:
+    approved: 4
+    canceled: 5
