@@ -1,35 +1,81 @@
+function getContact() {
+    return {
+        firstName: 'Mick',
+        lastName: 'Klapper',
+        mobile: '0170 - 79 44 24 0',
+        email : 'michael.klapper@gmail.com'
+    };
+}
+
 Ext.define('AM.view.event.Detail' ,{
     extend: 'Ext.panel.Panel',
     alias : 'widget.eventDetail',
     cls: 'detail',
     id: 'eventDetail',
-    autoScroll: true,
     border: true,
-    layout: {
-        type: 'table',
-        columns: 2
+    layout:'column',
+    margins:'35 5 5 0',
+    autoScroll:true,
+    defaults: {
+        layout: 'anchor',
+        defaults: {
+            anchor: '100%'
+        }
     },
+    tbar: [{
+        text: 'Get Directions',
+        action: 'getDirection'
+    }, '-', {
+        text: 'Twitter',
+        action: 'twitter'
+    }, '-', {
+        text: 'Facebook',
+        action: 'facebook'
+    }, '->', {
+        text: 'Update',
+        action: 'update'
+    }],
+
+    eventRecord: {},
 
     initComponent: function () {
         this.items = [{
-            title: 'detail',
-            html: 'some header'
+            columnWidth: 2/3,
+            baseCls:'x-plain',
+            bodyStyle:'padding:5px 0 5px 5px',
+            items:[{
+                xtype: 'eventDetailHeader',
+                title: this.eventRecord.get('title'),
+                location: this.eventRecord.get('location'),
+                contact: getContact(),
+                url: this.eventRecord.get('url'),
+                height:160
+            }, {
+                xtype: 'eventDetailAppointment',
+                title: 'Appointment',
+                date : this.eventRecord.get('date'),
+                timeBegin : this.eventRecord.get('timeBegin'),
+                timeEnd : this.eventRecord.get('timeEnd')
+            }, {
+                xtype: 'abstractTemplate',
+                title: 'Description',
+                message : this.eventRecord.get('description'),
+                template: '{message}'
+            }, {
+                xtype: 'abstractTemplate',
+                title: 'Comment',
+                message : this.eventRecord.get('comment'),
+                template: '{message}'
+            }]
         }, {
-            title: 'Location map',
-            html: 'some header',
-            rowspan:3
-        }, {
-            xtype: 'panel',
-            title: 'Appointment',
-            html : 'some date time datat'
-        }, {
-            xtype: 'panel',
-            title: 'Description',
-            html : 'Some details about the event'
-        }, {
-            xtype: 'panel',
-            title: 'Comment',
-            html : 'Just some private impressions about ...'
+            columnWidth: 1/3,
+            baseCls:'x-plain',
+            bodyStyle:'padding:5px 0 5px 5px',
+            items:[{
+                xtype: 'gMapsDetail',
+                location: this.eventRecord.get('location'),
+                height:300
+            }]
         }];
         /*Ext.apply(this, {
             tpl: Ext.create('Ext.XTemplate',
@@ -75,44 +121,36 @@ Ext.define('AM.view.event.Detail' ,{
     },
 
     /**
-     * Initializes this components contents. It checks for the properties
-     * html, contentEl and tpl/data.
-     * @private
+     * Get the current events title.
+     *
+     * @return string
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
      */
-    initContent: function() {
-        var me = this,
-            target = me.getTargetEl(),
-            contentEl,
-            pre;
-
-        if (me.html) {
-            target.update(Ext.core.DomHelper.markup(me.html));
-            delete me.html;
-        }
-
-        if (me.contentEl) {
-            contentEl = Ext.get(me.contentEl);
-            pre = Ext.baseCSSPrefix;
-            contentEl.removeCls([pre + 'hidden', pre + 'hide-display', pre + 'hide-offsets', pre + 'hide-nosize']);
-            target.appendChild(contentEl.dom);
-        }
-
-        if (me.tpl) {
-            // Make sure this.tpl is an instantiated XTemplate
-            if (!me.tpl.isTemplate) {
-                me.tpl = Ext.create('Ext.XTemplate', me.tpl);
-            }
-
-            if (me.data) {
-                me.location = me.data.location;
-                me.tpl[me.tplWriteMode](target, me.data);
-                delete me.data;
-            }
-        }
+    getEventTitle: function () {
+        return this.eventRecord.get('title');
     },
 
-    getLocation: function () {
-        return this.location;
+    /**
+     * Get the current events.
+     *
+     * @return AM.model.event.Event
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
+     */
+    getEventRecord: function () {
+        return this.eventRecord;
+    },
+
+    /**
+     * Get location object from detail view.
+     *
+     * @return object
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
+     */
+    getLocation: function() {
+        return  this.eventRecord.get('location');
     }
 
 });

@@ -16,6 +16,9 @@ Ext.define('AM.controller.Event', {
         'Location'
     ],
     refs: [{
+        ref: 'detailView',
+        selector: 'eventDetail'
+    }, {
         ref: 'contentArea',
         selector: 'viewport panel[id=contentPanel]'
     }, {
@@ -48,6 +51,18 @@ Ext.define('AM.controller.Event', {
             },
             'eventList button[action=delete]': {
                 click: this.deleteEvent
+            },
+            'eventDetail button[action=getDirection]': {
+                click: this.getDirectionAction
+            },
+            'eventDetail button[action=twitter]': {
+                click: this.twitterAction
+            },
+            'eventDetail button[action=facebook]': {
+                click: this.facebookAction
+            },
+            'eventDetail button[action=update]': {
+                click: this.updateAction
             }
         });
     },
@@ -69,6 +84,59 @@ Ext.define('AM.controller.Event', {
                 minWidth: 300
             }]
         });
+    },
+
+    /**
+     * Open new window with "Get Directions" of detail view location.
+     *
+     * @return void
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
+     */
+    getDirectionAction: function () {
+        var location = this.getDetailView().getLocation();
+        var url = 'http://maps.google.de/maps?daddr=' + escape(location.street + ' ' + location.number + ', ' + location.zip + ' ' + location.city + ', ' + location.country);
+
+        window.open(url);
+    },
+
+    /**
+     * Open new window with "twitter" to tweet the event.
+     *
+     * @return void
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
+     */
+    twitterAction: function () {
+        var url = 'http://www.twitter.com/share'
+
+        window.open(url);
+    },
+
+    /**
+     * Open new window with "twitter" to tweet the event.
+     *
+     * @return void
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
+     */
+    facebookAction: function () {
+        var url = 'http://www.facebook.com/sharer.php?t=' + escape(this.getDetailView().getEventTitle());
+
+        window.open(url);
+    },
+
+    /**
+     * Open edit event window.
+     *
+     * @return void
+     *
+     * @author Michael Klapper <mick.klapper.development@gmail.com>
+     */
+    updateAction: function () {
+        var eventRecord = this.getDetailView().getEventRecord();
+        var view = Ext.widget('eventEdit');
+        view.down('form').loadRecord(eventRecord);
     },
 
     /**
