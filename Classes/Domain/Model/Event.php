@@ -42,16 +42,19 @@ class Event {
 
 	/**
 	 * @var \DateTime
+	 * @validate GenericObject(\DateTime)
 	 */
 	protected $date;
 
 	/**
 	 * @var string
+	 * @validate String()
 	 */
 	protected $timeBegin;
 
 	/**
 	 * @var string
+	 * @validate String()
 	 */
 	protected $timeEnd;
 

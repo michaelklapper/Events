@@ -1,4 +1,5 @@
 Ext.Loader.setConfig({enabled:true});
+Ext.QuickTips.init();
 
 Ext.application({
     name: 'AM',

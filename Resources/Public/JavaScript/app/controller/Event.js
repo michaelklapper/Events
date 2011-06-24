@@ -40,8 +40,11 @@ Ext.define('AM.controller.Event', {
             'eventList': {
                 itemdblclick: this.addDetailTabView
             },
-            'eventEdit button[action=save]': {
-                click: this.updateEvent
+//            'eventEdit button[action=save]': {
+//                click: this.updateEvent
+//            },
+            'eventForm': {
+                recordSaved: this.updateEvent
             },
             'eventList button[action=edit]': {
                 click: this.editEvent
@@ -246,13 +249,10 @@ Ext.define('AM.controller.Event', {
      *
      * @author Michael Klapper <mick.klapper.development@gmail.com>
      */
-    updateEvent: function(button) {
-        var win    = button.up('window'),
-        form   = win.down('form'),
-        record = form.getRecord(),
+    updateEvent: function(form) {
+        var record = form.getRecord(),
         values = form.getValues(), message;
         record.set(values);
-        win.close();
 
         if (record.phantom) {
             this.getEventStore().add(record);
@@ -261,7 +261,6 @@ Ext.define('AM.controller.Event', {
             message = 'Update event: ';
         }
 
-        this.getEventStore().sync();
         this.getStatusBar().setStatus({
             text: message + record.get('title'),
             clear: true

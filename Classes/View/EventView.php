@@ -88,4 +88,30 @@ class EventView extends \F3\ExtJS\ExtDirect\View {
 		));
 		$this->assign('value', array('data' => $states, 'success' => TRUE));
     }
+
+	/**
+	 * Assigns errors to the view and converts them to a format that Ext JS
+	 * understands.
+	 *
+	 * @param \F3\FLOW3\Error\Result $result Errors e.g. from mapping results
+	 * @author Michael Klapper <mick.klapper.development@gmail.com>
+	 */
+	public function assignErrors(\F3\FLOW3\Error\Result $result) {
+		$errors = $result->getFlattenedErrors();
+		$output = array();
+
+		foreach ($errors as $propertyPath => $propertyErrors) {
+			$propertyArray = explode('.', $propertyPath);
+			array_shift($propertyArray);
+			$message = '';
+			foreach ($propertyErrors as $propertyError) {
+				$message .= $propertyError->getMessage();
+			}
+			$output[implode('.', $propertyArray)] = $message;
+		}
+		$this->assign('value', array(
+			'errors' => $output,
+			'success' => FALSE
+		));
+	}
 }

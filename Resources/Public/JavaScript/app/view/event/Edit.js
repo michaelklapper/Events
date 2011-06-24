@@ -13,7 +13,10 @@ Ext.define('AM.view.event.Edit', {
 
         this.buttons = [{
             text: 'Save',
-            action: 'save'
+            action: 'save',
+            handler: function () {
+                this.up('window').down('form').doSubmitForm();
+            }
         }, {
             text: 'Cancel',
             scope: this,

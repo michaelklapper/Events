@@ -64990,6 +64990,9 @@ Ext.define('Ext.form.Basic', {
 
     
     submit: function(options) {
+        console.log('submit')
+
+
         return this.doAction(this.standardSubmit ? 'standardsubmit' : this.api ? 'directsubmit' : 'submit', options);
     },
 

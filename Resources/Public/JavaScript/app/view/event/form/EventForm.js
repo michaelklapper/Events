@@ -2,9 +2,10 @@ Ext.define('AM.view.event.form.EventForm', {
     extend: 'AM.view.AbstractForm',
     alias : 'widget.eventForm',
 
-    initComponent: function() {
 
-        this.items = [{
+    initComponent: function() {
+        var config = {
+            items : [{
                 name : 'title',
                 fieldLabel: 'Title'
             }, {
@@ -55,12 +56,16 @@ Ext.define('AM.view.event.form.EventForm', {
                 enableAlignments: false,
                 name : 'comment',
                 fieldLabel: 'Comment'
+            }],
+            api: {
+                load: Events.Events_Controller_EventController.read,
+                update: Events.Events_Controller_EventController.update,
+                create: Events.Events_Controller_EventController.create
             }
-        ];
+        };
 
-//TODO this can be removed if nothing happend ...
-//        this.paramOrder = ['id', 'title', 'date', 'timeBegin', 'timeEnd', 'url', 'comment'];
-
+        Ext.apply(this.initialConfig, config);
+        Ext.apply(this, config);
         this.callParent(arguments);
     }
 });
