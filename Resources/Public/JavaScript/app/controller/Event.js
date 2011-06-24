@@ -87,7 +87,7 @@ Ext.define('AM.controller.Event', {
         if (!skipHistory) {
             AM.History.push('/event/index/');
         }
-
+        console.log("Event::index");
         this.getContentArea().addContent({
             xtype: 'tabContainer',
             minWidth: 300,
@@ -101,6 +101,7 @@ Ext.define('AM.controller.Event', {
                 minWidth: 300
             }]
         });
+        this.getTabContainer().setActiveTab('eventGrid')
     },
 
     /**
@@ -188,10 +189,12 @@ Ext.define('AM.controller.Event', {
      */
     detailAction: function (grid, record) {
         if (!Ext.isObject(record) && Ext.isString(grid)) {
-            record = this.getEventStore().getById(parseInt(grid));
+            console.log('history back action - show tab:')
+            console.log(grid)
+            record = this.getEventStore().findRecord('id', grid);
         }
         this.getTabContainer().addDetailTab('eventDetail', record);
-        AM.History.push('/event/detail/' + record.getId());
+        AM.History.push('/event/detail/' + record.get('id'));
         this.fireEvent('showEvent', record.get('title'));
     },
 
