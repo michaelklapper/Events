@@ -25,13 +25,17 @@ Ext.define('AM.view.TabContainer' ,{
      * @return void
      */
     addDetailTab: function (detailViewType, record) {
-        var item = this.add({
-            title: record.get('title'),
-            xtype: detailViewType,
-            eventRecord: record,
-            id: record.get('id'),
-            closable: true
-        });
-        this.setActiveTab(item);
+        if (!this.getComponent(record.get('id'))) {
+            this.add({
+                title: record.get('title'),
+                xtype: detailViewType,
+                eventRecord: record,
+                id: record.get('id'),
+                closable: true
+            });
+        }
+
+        this.setActiveTab(record.get('id'));
+
     }
 });
