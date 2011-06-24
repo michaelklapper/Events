@@ -94,8 +94,10 @@ Ext.define('AM.controller.Event', {
      * @author Michael Klapper <mick.klapper.development@gmail.com>
      */
     getDirectionAction: function () {
-        var location = this.getDetailView().getLocation();
-        var url = 'http://maps.google.de/maps?daddr=' + escape(location.street + ' ' + location.number + ', ' + location.zip + ' ' + location.city + ', ' + location.country);
+        var activeRecordUid = this.getTabContainer().getActiveTab().id,
+                activeRecord = this.getEventStore().getById(activeRecordUid),
+                location = activeRecord.get('location'),
+                url = 'http://maps.google.de/maps?daddr=' + escape(location.street + ' ' + location.number + ', ' + location.zip + ' ' + location.city + ', ' + location.country);
 
         window.open(url);
     },
@@ -121,7 +123,9 @@ Ext.define('AM.controller.Event', {
      * @author Michael Klapper <mick.klapper.development@gmail.com>
      */
     facebookAction: function () {
-        var url = 'http://www.facebook.com/sharer.php?t=' + escape(this.getDetailView().getEventTitle());
+        var activeRecordUid = this.getTabContainer().getActiveTab().id,
+                activeRecord = this.getEventStore().getById(activeRecordUid),
+                url = 'http://www.facebook.com/sharer.php?t=' + escape(activeRecord.get('title'));
 
         window.open(url);
     },

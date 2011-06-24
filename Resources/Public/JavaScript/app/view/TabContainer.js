@@ -29,6 +29,7 @@ Ext.define('AM.view.TabContainer' ,{
             title: record.get('title'),
             xtype: detailViewType,
             eventRecord: record,
+            id: record.get('id'),
             closable: true
         });
         this.setActiveTab(item);
