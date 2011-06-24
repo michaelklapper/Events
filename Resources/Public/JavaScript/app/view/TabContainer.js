@@ -4,6 +4,16 @@ Ext.define('AM.view.TabContainer' ,{
     
     maxTabWidth: 230,
     border: false,
+
+    listeners: {
+        'tabchange': function(tabPanel, tab){
+            if (Ext.isNumber(tab.id)) {
+                AM.History.push('/event/detail/' + tab.id);
+            } else {
+                AM.History.push('/event/index/');
+            }
+        }
+    },
     
     initComponent: function() {
         var me = this;
@@ -36,6 +46,5 @@ Ext.define('AM.view.TabContainer' ,{
         }
 
         this.setActiveTab(record.get('id'));
-
     }
 });

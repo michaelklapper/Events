@@ -13,6 +13,7 @@ Ext.application({
     ],
 
     launch: function() {
+        AM.App = this;
         Ext.create('Ext.container.Viewport', {
             layout: 'border',
             padding: 5,
@@ -21,6 +22,7 @@ Ext.application({
                 {xtype: 'contentArea'}
             ]
         });
+        AM.History.init();
     },
 
     /**
@@ -38,10 +40,20 @@ Ext.application({
             id: 'navigation',
             items: [{
                 text: 'Event List',
-                action: 'showEventList'
+                action: 'showEventList',
+                listeners: {
+                    click: function() {
+                        AM.History.push("/event/index/");
+                    }
+                }
             }, {
                 text: 'Event Calendar',
-                action: 'showEventCalendar'
+                action: 'showEventCalendar',
+                listeners: {
+                    click: function() {
+                        AM.History.push("/calendarController/index/");
+                    }
+                }
             }]
         };
     }

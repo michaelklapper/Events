@@ -13,11 +13,16 @@ Ext.define('AM.controller.CalendarController', {
     },
 
 
-    indexAction: function () {
+    indexAction: function (skipHistory) {
+
+        if (!skipHistory) {
+            AM.History.push('/CalendarController/index/');
+        }
+
         this.getContentPanel().addContent({
             xtype: 'panel',
             id: 'dummy-1',
-            html: 'hello calendar'
+            html: 'Calendar list comes here'
         });
     }
 });

@@ -17,9 +17,11 @@
     <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key={GoogleMapsApiKey}" type="text/javascript"></script>
 
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/Ext/ux/GMapPanel.js')}"></script>
+    <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/model/History.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/model/State.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/model/Event.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/model/Location.js')}"></script>
+    <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/store/History.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/store/State.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/store/Event.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/store/Location.js')}"></script>
@@ -42,9 +44,15 @@
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/controller/Calendar.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/controller/Location.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/controller/Event.js')}"></script>
+    <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/LocalStore.js')}"></script>
+    <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/app/History.js')}"></script>
     <script type="text/javascript" src="{f:uri.resource(path: 'JavaScript/Application.js')}"></script>
 </head>
 <body>
+    <form id="history-form" class="x-hide-display">
+        <input type="hidden" id="x-history-field" />
+        <iframe id="x-history-frame"></iframe>
+    </form>
     <section class="content">
         <f:render section="content"/>
     </section>

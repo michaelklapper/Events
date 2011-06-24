@@ -8,11 +8,13 @@ Ext.define('AM.controller.Event', {
     stores: [
         'Event',
         'State',
+        'History',
         'Location'
     ],
     models: [
         'Event',
         'State',
+        'History',
         'Location'
     ],
     refs: [{
@@ -31,14 +33,22 @@ Ext.define('AM.controller.Event', {
         ref: 'statusBar',
         selector: 'tabContainer statusbar'
     }],
-
     init: function() {
+        this.addEvents(
+            /**
+             * @event showEvent
+             * Fired after event shown.
+             * @param {String} event name.
+             */
+            "showEvent"
+        );
+
         this.control({
             'button[action=showEventList]': {
                 click: this.indexAction
             },
             'eventList': {
-                itemdblclick: this.addDetailTabView
+                itemdblclick: this.detailAction
             },
 //            'eventEdit button[action=save]': {
 //                click: this.updateEvent
@@ -73,7 +83,11 @@ Ext.define('AM.controller.Event', {
     /**
      *
      */
-    indexAction: function () {
+    indexAction: function (skipHistory) {
+        if (!skipHistory) {
+            AM.History.push('/event/index/');
+        }
+
         this.getContentArea().addContent({
             xtype: 'tabContainer',
             minWidth: 300,
@@ -172,8 +186,13 @@ Ext.define('AM.controller.Event', {
      *
      * @author Michael Klapper <mick.klapper.development@gmail.com>
      */
-    addDetailTabView: function (grid, record) {
+    detailAction: function (grid, record) {
+        if (!Ext.isObject(record) && Ext.isString(grid)) {
+            record = this.getEventStore().getById(parseInt(grid));
+        }
         this.getTabContainer().addDetailTab('eventDetail', record);
+        AM.History.push('/event/detail/' + record.getId());
+        this.fireEvent('showEvent', record.get('title'));
     },
 
     /**
