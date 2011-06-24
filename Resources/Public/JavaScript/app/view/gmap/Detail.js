@@ -20,7 +20,7 @@ Ext.define('AM.view.gmail.Detail', {
 
     initComponent: function() {
         this.callParent(arguments);
-        console.log(location);
+
         this.add({
             xtype: 'gmappanel',
             zoomLevel: 14,
