@@ -21,6 +21,12 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	protected $eventRepository;
 
 	/**
+	 * @var \F3\Events\Domain\Repository\StateRepository
+	 * @inject
+	 */
+	protected $stateRepository;
+
+	/**
 	 * @var \F3\Events\Domain\Repository\LocationRepository
 	 * @inject
 	 */
@@ -138,6 +144,11 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 		if ($location->getId()) {
 			$location = $this->locationRepository->findOneById($location->getId());
 			$event->setLocation($location);
+		}
+		$state = $event->getState();
+		if ($state->getId()) {
+			$state = $this->stateRepository->findOneById($state->getId());
+			$event->setState($state);
 		}
 		$this->eventRepository->add($event);
 		$this->view->assign('value', array('success' => TRUE));
