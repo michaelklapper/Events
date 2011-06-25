@@ -141,12 +141,12 @@ class EventController extends \F3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function createAction(\F3\Events\Domain\Model\Event $event) {
 		$location = $event->getLocation();
-		if ($location->getId()) {
+		if ($location instanceof \F3\Events\Domain\Model\Location && $location->getId()) {
 			$location = $this->locationRepository->findOneById($location->getId());
 			$event->setLocation($location);
 		}
 		$state = $event->getState();
-		if ($state->getId()) {
+		if ($state instanceof \F3\Events\Domain\Model\State && $state->getId()) {
 			$state = $this->stateRepository->findOneById($state->getId());
 			$event->setState($state);
 		}
